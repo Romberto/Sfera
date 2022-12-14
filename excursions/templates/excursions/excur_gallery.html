@@ -4,12 +4,37 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
 <link rel="stylesheet" href="{% static 'excursions/css/gallery.css'%}">
+<link rel="stylesheet" href="{% static 'main/css/main_media.css'%}">
 {% endblock %}
 {% block title%}Галерея{% endblock %}
 {% block content %}
 <main>
     <div class="container">
         <div class="gallery">
+                            <div class="menu__mobile">
+                    <div class="menu__mobile_burger">
+                        <div class="menu_mobile_inner">
+                            <div class="nemu_burger_lines"></div>
+                        </div>
+                    </div>
+                    <div class="mobile__menu-nav">
+
+                        <div class="mobile__menu_nav_list">
+                            <a class="mobile__menu_logo" href="/">
+                                <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
+                            </a>
+                            <a href="#" class="mobile__menu_btn">
+                                <div class="mobile__cross"></div>
+                            </a>
+                            <a href="{% url 'main'%}" class="mobile__menu_link">Главная</a>
+                            <a href="#" class="mobile__menu_link">Контакты</a>
+                            <a href="#" class="mobile__menu_link">О нас</a>
+                            <a href="{% url 'excursions'%}" class="mobile__menu_link">Экскурсии</a>
+                        </div>
+
+                    </div>
+
+                </div>
             <nav class="menu">
                 <a href="#" class="menu__link">
                     <img class="logo__img" src="{% static 'main/img/logo.png'%}">
@@ -44,5 +69,5 @@
 </main>
 {%endblock%}
 {% block scripts %}
-<script type="text/javascript" src="{% static 'excursions/js/gallery.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
 {% endblock %}

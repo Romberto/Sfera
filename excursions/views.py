@@ -26,6 +26,15 @@ class ExcursionItemView(View):
             'excursion': excursion
         })
 
+class ExcursionCustomItem(View):
+    def get(self, request, id, price):
+        excursion = ExcursionModel.objects.get(id=id)
+
+        return render(request, 'excursions/excur_item.html', {
+            'excursion': excursion,
+            'price': price
+        })
+
 
 class GalleryView(View):
 
@@ -49,23 +58,48 @@ class PointGalleryView(View):
         })
 
 
+def clear_phone(phone):
+    newTel = ''.join(filter(str.isdigit, phone))
+    if str(newTel[0]) != '7':
+        newTel = newTel.replace(newTel[0], '7', 1)
+
+        return newTel
+    else:
+        return newTel
+
 # генерация кода для подтверждения телефона
 def checkPhone(request):
     id_excursion = request.GET.get('id')
     phone = request.GET.get('phone')
+    c_phone = clear_phone(phone)
     excursion_db = ExcursionModel.objects.get(id=id_excursion)
     body = randint(1111, 9999)  # код для сверки телефона
-    code = ExcursionPhoneCodModel.objects.filter(phone=phone)
-    if code:
-        code[0].random_cod = body
-        code[0].save()
-    else:
+    try:
+        code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
+        code.random_cod = body
+        code.save()
+    except Exception as _err:
         code = ExcursionPhoneCodModel(
-            phone=phone,
+            phone=c_phone,
             random_cod=body,
             excursions=excursion_db
         )
         code.save()
+        data = {
+            "code": body,
+            "status": 200,
+            "phone": phone
+        }
+        sendler = SendlerMessage()
+
+        # sendler.send(phone, body)
+
+        # todo срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}
+        print(f'срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}')
+        return JsonResponse(data)
+
+
+
     data = {
         "code": body,
         "status": 200,
@@ -83,21 +117,29 @@ def checkPhone(request):
 def checkCode(request):
     code_input = request.GET.get('code')
     phone = request.GET.get('phone')
+    c_phone = clear_phone(phone)
     status = True
     try:
-        code = ExcursionPhoneCodModel.objects.get(phone=phone)
+        code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
+
         if not str(code.random_cod) == code_input:
-            status = False
-            phone = phone
+            status = None
+
+
 
     except Exception as _err:
         print('*******', _err)
-        phone = None
         status = False
 
+        data = {
+            'status': status,
+            'phone': c_phone
+        }
+        return JsonResponse(data)
+
     data = {
-        'code': status,
-        'phone': phone
+        'status': status,
+        'phone': c_phone
     }
     return JsonResponse(data)
 
@@ -117,12 +159,22 @@ def ExcCod(request):
     )
     token.save()
 
-
     #sendler.send(phone, body)
-
 
     data={
         'exc': exc,
-        'phone': phone
+        'phone': phone,
+        'body':body
+    }
+    return JsonResponse(data)
+
+def widget_form(request):
+    phone = request.GET.get('phone')
+    c_phone = clear_phone(phone)
+    order = ExcursionPhoneCodModel.objects.get(phone=c_phone)
+
+    data = {
+        'phone': c_phone,
+        'order': order.id
     }
     return JsonResponse(data)

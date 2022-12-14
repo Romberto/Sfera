@@ -18,6 +18,7 @@ window.addEventListener('load', function(){
     if(!regex.test(phone)){
     alert('Не корректный номер телефона');
     }else{
+
         $.ajax({
             url: '/excursions/check_phone/',            /* Куда пойдет запрос */
             method: 'get',                  /* Метод передачи (post или get) */
@@ -48,7 +49,7 @@ window.addEventListener('load', function(){
                 dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
                 data: {phone: phone, code: code},            /* Параметры передаваемые в запросе. */
                 success: function(response){
-                    if(response['code']){
+                    if(response['status']){
                         $('.code').hide(1000)
                         $('.success__phone').css('visibility', 'visible')
                         $('#popup__phone b').text(phone)
@@ -66,6 +67,28 @@ window.addEventListener('load', function(){
     $('.js_pay_btn').on('click', function(e){
         $('.popup__inner').hide()
         $('.pay__widget').css('visibility', 'visible')
+        var phone = $('.hidden__input').attr('data-value')
+            $.ajax({
+                url: '/excursions/widget/',            /* Куда пойдет запрос */
+                method: 'get',                  /* Метод передачи (post или get) */
+                dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+                data: {phone: phone},            /* Параметры передаваемые в запросе. */
+                success: function(response){
+                    console.log(response)
+                    $('.pay__widget form #form_phone').attr('value', response['phone'])
+                   // $('.pay__widget form #order').attr('value', response['order'])
+
+
+                },
+                error:function (error){
+                    console.log(error)
+                }
+
+            })
+
+
+
+
     });
 
     $('.js_no_pay_btn').on('click', function(){

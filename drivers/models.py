@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 import bcrypt
+from django.urls import reverse
 
 
 def passwd_hash(passwd):
@@ -34,6 +35,9 @@ class DriverModel(models.Model):
     def __str__(self):
         return str(self.login)
 
+    def get_absolute_url(self):
+        return reverse('drivers',  kwargs={'id': self.id})
+
     def save(self, *args, **kwargs):
         password, salt = passwd_hash(self.password)
         self.password = None
@@ -58,4 +62,6 @@ class DriverAdminGroupModel(models.Model):
 
     def __str__(self):
         return self.name_group
+
+
 

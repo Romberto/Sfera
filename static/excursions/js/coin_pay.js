@@ -73,6 +73,22 @@ window.addEventListener('load', function(){
         $('.coin__pay_btn').show()
     });
 
+    $('.js_success_pay').on('click', function(e){
+        var phone = $('.hidden__input').attr('data-value')
+        // забрать сумму оплаты из системы оплаты для идентификации экскурсии
+        // пока будем брать заголовок страницы
+        var excursion_name = $('#excursion_title').text()
+                    $.ajax({
+                url: '/excursions/excursion_code/',            /* Куда пойдет запрос */
+                method: 'get',                  /* Метод передачи (post или get) */
+                dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+                data: {phone: phone, exc: excursion_name},            /* Параметры передаваемые в запросе. */
+                success: function(response){
+                    console.log(response)
+                }
+                })
+    })
+
 
 
 });

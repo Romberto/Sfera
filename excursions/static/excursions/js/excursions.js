@@ -1,7 +1,5 @@
 window.addEventListener('load', function(){
 
-
-
     $('.block__btn').click(function(e){
         e.preventDefault()
         var name = $(this).attr('data-value') // название экскурсии
@@ -9,11 +7,6 @@ window.addEventListener('load', function(){
         $('.excursion__list, .excursion__title').fadeOut(500)
         $('.phone').fadeIn(900)
     });
-
-
-
-
-
 
     $('.limitInput').keyup(function(){
         var count = $(this).val().length
@@ -25,6 +18,19 @@ window.addEventListener('load', function(){
             })
         }
     });
+
+    /* валидция поля ввода суммы на кастомномном жетоне */
+
+    $('.js_custom_input').keyup(function(){
+        var data = $(this).val()
+        var excursion_id = $('#excursion_id').text()
+        if($.isNumeric(data) && parseInt(data) >= 3000){
+            $('.query__excursion_link span').css('height', '0px')
+            $('.js_custom__price_link').attr('href', ''+excursion_id+'/'+data+'')
+        }else{
+            $('.query__excursion_link span').css('height', '50px')
+        }
+    })
 
 
 

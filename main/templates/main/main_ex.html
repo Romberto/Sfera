@@ -3,12 +3,37 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
 <link rel="stylesheet" href="{% static 'excursions/css/gallery.css'%}">
+<link rel="stylesheet" href="{% static 'main/css/main_media.css'%}">
 {% endblock %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
     <main>
         <div class="container">
             <div class="excursion">
+                <div class="menu__mobile">
+                    <div class="menu__mobile_burger">
+                        <div class="menu_mobile_inner">
+                            <div class="nemu_burger_lines"></div>
+                        </div>
+                    </div>
+                    <div class="mobile__menu-nav">
+
+                        <div class="mobile__menu_nav_list">
+                            <a class="mobile__menu_logo" href="/">
+                                <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
+                            </a>
+                            <a href="#" class="mobile__menu_btn">
+                                <div class="mobile__cross"></div>
+                            </a>
+                            <a class="mobile__menu_link" href="#">Контакты</a>
+                            <a class="mobile__menu_link" href="#">О нас</a>
+                            <a class="mobile__menu_link" href="{% url 'excursions'%}">Экскурсии</a>
+                            <a class="mobile__menu_link" href="{% url 'gallery'%}">Что посмотреть?</a>
+                        </div>
+
+                    </div>
+
+                </div>
                 <nav class="menu">
                     <a href="#" class="menu__link">
                         <img class="logo__img" src="{% static 'main/img/logo.png'%}">
