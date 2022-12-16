@@ -14,6 +14,7 @@
     --yellow:#e7e80f;
     --red: #c0448f;
     --black: #131313;
+    --green: #008000;
 }
 
 .excursion{
@@ -157,6 +158,10 @@
     margin-bottom: 30px;
 }
 
+.custom__text{
+    padding-bottom: 10px;
+}
+
 .custom__price_block{
     min-height: 165px;
     text-align: center;
@@ -175,4 +180,59 @@
 
 .point__content{
     padding-top: 140px;
+}
+
+.count_human_block{
+    width: 110px;
+    height: 50px;
+    background: var(--white);
+    border:2px solid var(--red);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    padding:5px;
+}
+
+.count_human_plus,
+.count_human_minus
+{
+    position: relative;
+    width: 35px;
+    cursor: pointer;
+    height: 40px;
+}
+
+
+.count_human_plus::after,
+.count_human_minus::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 29px;
+    height: 5px;
+    background: var(--red);
+    transform: translate(-50%, -50%)
+}
+
+.count_human_plus::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 29px;
+    background: var(--red);
+    transform: translate(-50%, -50%)
+}
+
+.count_human_window{
+    width: 30px;
+    text-align: center;
+    padding-top: 2px;
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--red);
 }

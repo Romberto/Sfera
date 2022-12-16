@@ -79,10 +79,11 @@ def checkPhone(request):
         code.random_cod = body
         code.save()
     except Exception as _err:
+
         code = ExcursionPhoneCodModel(
             phone=c_phone,
             random_cod=body,
-            excursions=excursion_db
+            excursions=excursion_db,
         )
         code.save()
         data = {
@@ -117,10 +118,17 @@ def checkPhone(request):
 def checkCode(request):
     code_input = request.GET.get('code')
     phone = request.GET.get('phone')
+    price = request.GET.get('price')
     c_phone = clear_phone(phone)
     status = True
     try:
         code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
+        if price:
+            code.custom_price = price
+            code.save()
+        else:
+            code.custom_price = code.excursions.price
+            code.save()
 
         if not str(code.random_cod) == code_input:
             status = None
@@ -171,10 +179,11 @@ def ExcCod(request):
 def widget_form(request):
     phone = request.GET.get('phone')
     c_phone = clear_phone(phone)
-    order = ExcursionPhoneCodModel.objects.get(phone=c_phone)
-
+    cart = ExcursionPhoneCodModel.objects.get(phone=c_phone)
+    number_order = cart.id + 100
     data = {
         'phone': c_phone,
-        'order': order.id
+        'order': cart.id,
+        'number_order': number_order
     }
     return JsonResponse(data)

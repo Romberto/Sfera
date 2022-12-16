@@ -1,7 +1,7 @@
 from django.db import models
 
 from drivers.models import DriverModel
-from excursions.models import ExcursionModel
+from excursions.models import ExcursionModel, ExcursionPhoneCodModel
 
 
 class TokenExModel(models.Model):
@@ -13,6 +13,8 @@ class TokenExModel(models.Model):
     driver_activate = models.ForeignKey(DriverModel, on_delete=models.CASCADE, null=True,
                                         blank=True)  # водитель-экскурсовод который активировал токен
     excursion = models.ForeignKey(ExcursionModel, on_delete=models.CASCADE, null=True)
+    cart = models.ForeignKey(ExcursionPhoneCodModel, on_delete=models.CASCADE, null=True, blank=True)
+    count_human = models.IntegerField(default=1)
 
     def __str__(self):
         return str(self.body)

@@ -44,6 +44,7 @@
 
                     <div class="phone__form">
                         <label for="phone">укажите свой номер телефона</label>
+                        <input class="phone_input" type="hidden" id="cod_price" value="{{price}}">
                         <input id="phone" type="text" class="phone__input" placeholder="79998887766">
                         <div class="phone_btn" name="phone_form">подтвердить</div>
                     </div>
@@ -54,6 +55,7 @@
                         <p class="code__description">В течение 30 секунд, Вам придёт СМС с 4-х значным кодом, введите его в
                             поле под этим текстом.
                             Тем самым Вы подтвердите свой номер телефона.</p>
+
                         <input id="code" type="text" maxlength="4" class="phone__input limitInput">
                         <p class="text__error"></p>
                     </div>

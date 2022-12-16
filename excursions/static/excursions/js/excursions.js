@@ -32,6 +32,21 @@ window.addEventListener('load', function(){
         }
     })
 
+    $('.js_button_plus').on('click', function(e){
+        var number = parseInt($(this).next().text())
+        $(this).next().text(number+1)
+
+    });
+
+    $('.js_button_minus').on('click', function(e){
+        var number =parseInt($(this).prev().text())
+        if(number>1){
+            $(this).prev().text(number-1)
+        }else{
+            e.preventDefault()
+        }
+    });
+
 
 
 });
