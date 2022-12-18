@@ -32,6 +32,8 @@ class ExcursionPhoneCodModel(models.Model):      #корзина
     random_cod = models.IntegerField()
     excursions = models.ForeignKey(ExcursionModel, on_delete=models.CASCADE, null=True, blank=True)
     custom_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    human_count = models.IntegerField(null=True, blank=True)
+
     def __str__(self):
         return str(self.phone)
 

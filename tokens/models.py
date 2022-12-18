@@ -12,9 +12,7 @@ class TokenExModel(models.Model):
     date_activate = models.DateTimeField(null=True, blank=True)  # время активации токена
     driver_activate = models.ForeignKey(DriverModel, on_delete=models.CASCADE, null=True,
                                         blank=True)  # водитель-экскурсовод который активировал токен
-    excursion = models.ForeignKey(ExcursionModel, on_delete=models.CASCADE, null=True)
-    cart = models.ForeignKey(ExcursionPhoneCodModel, on_delete=models.CASCADE, null=True, blank=True)
-    count_human = models.IntegerField(default=1)
+
 
     def __str__(self):
         return str(self.body)

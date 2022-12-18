@@ -22,8 +22,10 @@ class ExcursionItemView(View):
 
     def get(self, request, id):
         excursion = ExcursionModel.objects.get(id=id)
+        count_human = request.GET.get('count_human')
         return render(request, 'excursions/excur_item.html', {
-            'excursion': excursion
+            'excursion': excursion,
+            'count_human': count_human
         })
 
 class ExcursionCustomItem(View):
@@ -83,7 +85,7 @@ def checkPhone(request):
         code = ExcursionPhoneCodModel(
             phone=c_phone,
             random_cod=body,
-            excursions=excursion_db,
+            excursions=excursion_db
         )
         code.save()
         data = {
@@ -119,6 +121,9 @@ def checkCode(request):
     code_input = request.GET.get('code')
     phone = request.GET.get('phone')
     price = request.GET.get('price')
+    human_count = request.GET.get('human_count')
+    print('human_count=',human_count)
+
     c_phone = clear_phone(phone)
     status = True
     try:
@@ -128,6 +133,7 @@ def checkCode(request):
             code.save()
         else:
             code.custom_price = code.excursions.price
+            code.human_count = int(human_count)
             code.save()
 
         if not str(code.random_cod) == code_input:
@@ -154,23 +160,19 @@ def checkCode(request):
 
 
 def ExcCod(request):
-    exc = request.GET.get('exc')
     phone = request.GET.get('phone')
-    excursion = ExcursionModel.objects.get(name=exc)
     body = randint(11111, 99999)
     sendler = SendlerMessage()
     phone = sendler.check_phone(phone)
     token = TokenExModel(
         body = body,
         phone = phone,
-        excursion = excursion
     )
     token.save()
 
     #sendler.send(phone, body)
 
     data={
-        'exc': exc,
         'phone': phone,
         'body':body
     }

@@ -49,12 +49,12 @@
                 </ul>
             </nav>
             <section class="point__content">
-                <h2 class="excursion__title">Выберите жетон</h2>
+                <h2 class="excursion__title">Выберите маршрут</h2>
                 <ul class="query__excursion">
                     {% for excursion in excursions %}
                     {% if excursion.custom %}
                     <li class="query__excursion_item">
-                        <div class="query__excursion_link" href="{% url 'excursion_item' excursion.id  %}">
+                        <div class="query__excursion_link">
                             <span id="excursion_id" type="hidden">{{excursion.id}}</span>
                             <img src="{% get_media_prefix %}{{excursion.photo}}" class="query__excursion_img">
                             <p class="query__excursion_text"><b>{{excursion.name}}</b></p>
@@ -65,7 +65,7 @@
                                 <input class="custom__price_input js_custom_input">
 
                             </div>
-                            <a class="query__excursion_price js_custom__price_link " href="#">Далее</a>
+                            <a class="query__excursion_price js_custom__price_link " href="{% url 'excursion_item' excursion.id  %}">Далее</a>
                             <span></span>
                         </div>
                     </li>
@@ -81,7 +81,7 @@
                                 <div class="count_human_minus js_button_minus"></div>
                             </div>
                             <p class="query__excursion_text">{{ excursion.description|slice:"200" }}{% if excursion.description|length > 200 %}...{% endif %}</p>
-                            <a class="query__excursion_price js_excursion_link href='{% url 'excursion_item' excursion.id  %}'">Монета {{excursion.price}} руб.</a>
+                            <a class="query__excursion_price js_excursion_link" href='{% url "excursion_item" excursion.id  %}'>Монета {{excursion.price}} руб.</a>
                         </div>
                     </li>
                     {% endif %}

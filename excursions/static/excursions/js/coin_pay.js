@@ -4,6 +4,7 @@ window.addEventListener('load', function(){
         var name = $(this).attr('data-value') // название экскурсии
         $('.hidden').html('<input class="hidden__input" type="hidden" data-value="'+name+'">')
         $('.phone').css('visibility', 'visible')
+
         $(this).hide()
 
     });
@@ -12,7 +13,8 @@ window.addEventListener('load', function(){
     e.preventDefault()
     var id = $('.coin__pay_btn').attr('data-value') // название экскурсии
     var phone = $('#phone').val()
-    $('.hidden').html('<input class="hidden__input" type="hidden" data-value="'+phone+'">')
+
+    $('.hidden').html('<input id="phone_val" class="hidden__input" type="hidden" data-value="'+phone+'">')
     let regex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
     // дальше идет проверка на соответствие выражению
     if(!regex.test(phone)){
@@ -29,6 +31,7 @@ window.addEventListener('load', function(){
                 $('.code').css('visibility', 'visible')
                 console.log(response['code'])
 
+
             },
             error:function (error){
                 console.log(error)
@@ -42,14 +45,15 @@ window.addEventListener('load', function(){
     $('.limitInput').keyup(function(){
         var count = $(this).val().length
         if(count === 4){
-            var phone = $('.hidden__input').attr('data-value')
+            var phone = $('#phone_val').attr('data-value')
             var code = $(this).val()
             var price = $('#cod_price').val()
+            var human_count = $('#count_human').attr('data-value')
             $.ajax({
                 url: '/excursions/check_code/',            /* Куда пойдет запрос */
                 method: 'get',                  /* Метод передачи (post или get) */
                 dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
-                data: {phone: phone, code: code, price:price},            /* Параметры передаваемые в запросе. */
+                data: {phone: phone, code: code, price:price, human_count:human_count},            /* Параметры передаваемые в запросе. */
                 success: function(response){
                     if(response['status']){
                         $('.code').hide(1000)
@@ -80,6 +84,7 @@ window.addEventListener('load', function(){
                 data: {phone: phone},            /* Параметры передаваемые в запросе. */
                 success: function(response){
                     console.log(response)
+
                     $('.pay__widget form #form_phone').attr('value', response['phone'])
                    // $('.pay__widget form #order').attr('value', response['order'])
 
@@ -103,6 +108,8 @@ window.addEventListener('load', function(){
 
     $('.js_success_pay').on('click', function(e){
         var phone = $('.hidden__input').attr('data-value')
+        $('.success__phone').css('visibility', 'hidden')
+        $('.pay__widget').css('visibility', 'hidden')
         // забрать сумму оплаты из системы оплаты для идентификации экскурсии
         // пока будем брать заголовок страницы
         var excursion_name = $('#excursion_title').text()
@@ -110,9 +117,11 @@ window.addEventListener('load', function(){
                 url: '/excursions/excursion_code/',            /* Куда пойдет запрос */
                 method: 'get',                  /* Метод передачи (post или get) */
                 dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
-                data: {phone: phone, exc: excursion_name},            /* Параметры передаваемые в запросе. */
+                data: {phone: phone},            /* Параметры передаваемые в запросе. */
                 success: function(response){
                     console.log(response)
+                   // $('.success__phone').css('visibility', 'hidden')
+
                 }
                 })
     })

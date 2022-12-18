@@ -19,7 +19,7 @@
                         <li class="menu__item"><a href="{% url 'main'%}" class="menu__link">Главная</a></li>
                         <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
                         <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
-                        <li class="menu__item"><a href="{% url 'excursions'%}" class="menu__link">Экскурсии</a></li>
+                        <li class="menu__item"><a href="{% url 'excursions'%}" class="menu__link">Маршруты</a></li>
                         <li class="menu__item"><a href="{% url 'gallery'%}" class="menu__link">Что посмотреть?</a></li>
                     </ul>
             </nav>
@@ -46,6 +46,7 @@
                         <label for="phone">укажите свой номер телефона</label>
                         <input class="phone_input" type="hidden" id="cod_price" value="{{price}}">
                         <input id="phone" type="text" class="phone__input" placeholder="79998887766">
+                        <input id="count_human" class="human_count_hidden__input" type="hidden" data-value="{{count_human}}">
                         <div class="phone_btn" name="phone_form">подтвердить</div>
                     </div>
                 </div>
@@ -73,7 +74,7 @@
 
                     <div class="pay__widget">
                         <p> здесь будет виджет системы оплаты </p>
-                        <div class="popup__pay_btn js_success_pay">успешная оплата</div>
+                        <a href="/" class="popup__pay_btn js_success_pay">успешная оплата</a>
 
                     </div>
 

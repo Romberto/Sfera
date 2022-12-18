@@ -34,7 +34,12 @@ window.addEventListener('load', function(){
 
     $('.js_button_plus').on('click', function(e){
         var number = parseInt($(this).next().text())
-        $(this).next().text(number+1)
+        if(number<9){
+            $(this).next().text(number+1)
+        }else{
+            e.preventDefault()
+        }
+
 
     });
 
@@ -47,6 +52,18 @@ window.addEventListener('load', function(){
         }
     });
 
-
+    $('.js_excursion_link').on('click', function(e){
+        var count_human = $(this).parent().find('.count_human_window').text()
+        $(this).attr('href', function(){
+           // e.preventDefault()
+           // console.log(this.href)
+            if(this.href.includes('/?count_human=')){
+                var fields = this.href.split('?count_human=')
+                return fields[0]+'?count_human='+count_human
+            }else{
+                return this.href+'?count_human='+count_human
+            }
+        })
+    })
 
 });
