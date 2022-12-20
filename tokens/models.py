@@ -12,6 +12,7 @@ class TokenExModel(models.Model):
     date_activate = models.DateTimeField(null=True, blank=True)  # время активации токена
     driver_activate = models.ForeignKey(DriverModel, on_delete=models.CASCADE, null=True,
                                         blank=True)  # водитель-экскурсовод который активировал токен
+    cart = models.ForeignKey(ExcursionPhoneCodModel, on_delete=models.CASCADE, blank=True, null=True)
 
 
     def __str__(self):

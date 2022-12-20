@@ -22,7 +22,8 @@ urlpatterns = [
     path('', include('main.urls')),
     path('admin/', admin.site.urls),
     path('drivers/', include('drivers.urls')),
-    path('excursions/', include('excursions.urls'))
+    path('excursions/', include('excursions.urls')),
+
 
 ]
 if settings.DEBUG:

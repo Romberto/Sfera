@@ -28,6 +28,7 @@ class ExcursionItemView(View):
             'count_human': count_human
         })
 
+
 class ExcursionCustomItem(View):
     def get(self, request, id, price):
         excursion = ExcursionModel.objects.get(id=id)
@@ -69,6 +70,7 @@ def clear_phone(phone):
     else:
         return newTel
 
+
 # генерация кода для подтверждения телефона
 def checkPhone(request):
     id_excursion = request.GET.get('id')
@@ -101,8 +103,6 @@ def checkPhone(request):
         print(f'срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}')
         return JsonResponse(data)
 
-
-
     data = {
         "code": body,
         "status": 200,
@@ -110,7 +110,7 @@ def checkPhone(request):
     }
     sendler = SendlerMessage()
 
-    #sendler.send(phone, body)
+    # sendler.send(phone, body)
 
     # todo срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}
     print(f'срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}')
@@ -122,7 +122,7 @@ def checkCode(request):
     phone = request.GET.get('phone')
     price = request.GET.get('price')
     human_count = request.GET.get('human_count')
-    print('human_count=',human_count)
+
 
     c_phone = clear_phone(phone)
     status = True
@@ -130,10 +130,12 @@ def checkCode(request):
         code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
         if price:
             code.custom_price = price
+            code.human_count = 1
             code.save()
         else:
             code.custom_price = code.excursions.price
-            code.human_count = int(human_count)
+            index_human_count = int(human_count)
+            code.human_count = index_human_count
             code.save()
 
         if not str(code.random_cod) == code_input:
@@ -158,25 +160,28 @@ def checkCode(request):
     return JsonResponse(data)
 
 
-
 def ExcCod(request):
     phone = request.GET.get('phone')
+    phone = clear_phone(phone)
+    cart = ExcursionPhoneCodModel.objects.get(phone=phone)
     body = randint(11111, 99999)
     sendler = SendlerMessage()
     phone = sendler.check_phone(phone)
     token = TokenExModel(
-        body = body,
-        phone = phone,
+        body=body,
+        phone=phone,
+        cart= cart
     )
     token.save()
 
-    #sendler.send(phone, body)
+    # sendler.send(phone, body)
 
-    data={
+    data = {
         'phone': phone,
-        'body':body
+        'body': body
     }
     return JsonResponse(data)
+
 
 def widget_form(request):
     phone = request.GET.get('phone')

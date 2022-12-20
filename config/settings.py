@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'drivers',
     'tokens',
     'excursions',
-    'main'
+    'main',
+
+
 ]
 
 MIDDLEWARE = [
