@@ -254,6 +254,13 @@
     border-bottom: 3px solid #fff;
 }
 
+.cart_img{
+    width: 50px;
+    height: 37px;
+}
+
+
+
 .excursion__content{
     display:flex;
     align-items: center;

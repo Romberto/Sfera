@@ -42,35 +42,35 @@ window.addEventListener('load', function(){
     });
 // подтверждение телефона проверка кода подтверждения
 // ajax запрос
-    $('.limitInput').keyup(function(){
-        var count = $(this).val().length
-        if(count === 4){
-            var phone = $('#phone_val').attr('data-value')
-            var code = $(this).val()
-            var price = $('#cod_price').val()
-            var human_count = $('#count_human').attr('data-value')
-            $.ajax({
-                url: '/excursions/check_code/',            /* Куда пойдет запрос */
-                method: 'get',                  /* Метод передачи (post или get) */
-                dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
-                data: {phone: phone, code: code, price:price, human_count:human_count},            /* Параметры передаваемые в запросе. */
-                success: function(response){
-                    if(response['status']){
-                        $('.code').hide(1000)
-                        $('.success__phone').css('visibility', 'visible')
-                        $('#popup__phone b').text(phone)
-                    }else{
-
-                        $('.text__error').text('не верный код')
-
-                    }
-                },
-                error:function (error){
-                    console.log(error)
-            }
-            })
-        }
-    });
+//    $('.limitInput').keyup(function(){
+//        var count = $(this).val().length
+//        if(count === 4){
+//            var phone = $('#phone_val').attr('data-value')
+//            var code = $(this).val()
+//            var price = $('#cod_price').val()
+//            var human_count = $('#count_human').attr('data-value')
+//            $.ajax({
+//                url: '/excursions/check_code/',            /* Куда пойдет запрос */
+//                method: 'get',                  /* Метод передачи (post или get) */
+//                dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+//                data: {phone: phone, code: code, price:price, human_count:human_count},            /* Параметры передаваемые в запросе. */
+//                success: function(response){
+//                    if(response['status']){
+//                        $('.code').hide(1000)
+//                        $('.success__phone').css('visibility', 'visible')
+//                        $('#popup__phone b').text(phone)
+//                    }else{
+//
+//                        $('.text__error').text('не верный код')
+//
+//                    }
+//                },
+//                error:function (error){
+//                    console.log(error)
+//            }
+//            })
+//        }
+//    });
 //перейти к оплате
 // заполняем форму
     $('.js_pay_btn').on('click', function(e){

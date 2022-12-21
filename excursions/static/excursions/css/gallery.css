@@ -114,14 +114,11 @@
 .query__excursion_text{
     padding: 5px;
     text-align: start;
-    margin-bottom: 20px;
 }
 .query__excursion_price{
-    height: 50px;
+    height: 40px;
     text-align: center;
-    background: blue;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    background: var(--red);
     font-weight: 600;
     color: yellow;
     font-size: 22px;
@@ -129,17 +126,24 @@
     position: relative;
 }
 
-.query__excursion_link span{
-    width: 100%;
-    height: 50px;
+
+.qyery__excursion_add_to_cart{
     position: absolute;
-    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: var(--red);
+    color: var(--yellow);
     left: 0;
-    filter: blur(25px);
-    z-index: 10;
+    bottom: 0;
+    cursor: pointer;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    background: var(--white);
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    text-align: -webkit-center;
+    padding-top: 32px;
+    display: none;
 }
 
 .excursion__item{

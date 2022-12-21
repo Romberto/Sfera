@@ -1,13 +1,15 @@
 from random import randint
 
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 
+from cart.models import CartModel, CartItemModel
 from excursions.models import ExcursionModel, ExcursionPhoneCodModel, ExcursionPointModel
 from sendler import SendlerMessage
 from tokens.models import TokenExModel
-
+from django.contrib.auth import authenticate, login
 
 class ExcursionsView(View):
     def get(self, request):
@@ -73,91 +75,72 @@ def clear_phone(phone):
 
 # генерация кода для подтверждения телефона
 def checkPhone(request):
-    id_excursion = request.GET.get('id')
     phone = request.GET.get('phone')
     c_phone = clear_phone(phone)
-    excursion_db = ExcursionModel.objects.get(id=id_excursion)
     body = randint(1111, 9999)  # код для сверки телефона
-    try:
-        code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
-        code.random_cod = body
-        code.save()
-    except Exception as _err:
-
-        code = ExcursionPhoneCodModel(
-            phone=c_phone,
-            random_cod=body,
-            excursions=excursion_db
+    if User.objects.filter(username=c_phone).exists():
+        user = User.objects.get(username=c_phone)
+        user.set_password(str(body))
+        user.save()
+    else:
+        user = User.objects.create_user(username=str(c_phone), password=str(body))
+        cart = CartModel.objects.create(
+            user=user
         )
-        code.save()
-        data = {
-            "code": body,
-            "status": 200,
-            "phone": phone
-        }
-        sendler = SendlerMessage()
-
-        # sendler.send(phone, body)
-
-        # todo срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}
-        print(f'срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}')
-        return JsonResponse(data)
-
+        cart.save()
     data = {
         "code": body,
-        "status": 200,
         "phone": phone
     }
     sendler = SendlerMessage()
-
     # sendler.send(phone, body)
-
     # todo срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}
     print(f'срабатывает функция, которая отправляет СМС с кодом на номер {phone} код {body}')
     return JsonResponse(data)
 
 
+
 def checkCode(request):
     code_input = request.GET.get('code')
     phone = request.GET.get('phone')
-    price = request.GET.get('price')
-    human_count = request.GET.get('human_count')
-
-
     c_phone = clear_phone(phone)
-    status = True
-    try:
-        code = ExcursionPhoneCodModel.objects.get(phone=c_phone)
-        if price:
-            code.custom_price = price
-            code.human_count = 1
-            code.save()
-        else:
-            code.custom_price = code.excursions.price
-            index_human_count = int(human_count)
-            code.human_count = index_human_count
-            code.save()
-
-        if not str(code.random_cod) == code_input:
-            status = None
-
-
-
-    except Exception as _err:
-        print('*******', _err)
+    user = authenticate(request, username=str(c_phone), password=str(code_input))
+    if user:
+        login(request, user)
+        status = True
+    else:
         status = False
-
-        data = {
-            'status': status,
-            'phone': c_phone
-        }
-        return JsonResponse(data)
-
     data = {
-        'status': status,
-        'phone': c_phone
+        'status': status
     }
     return JsonResponse(data)
+
+def add_to_cart(request):
+    try:
+        id_exc = request.GET.get('id_exc')
+        count = request.GET.get('count')
+        custom_price = request.GET.get('custom_price')
+        user = request.user.id
+        cart = CartModel.objects.get(user=user)
+        excursion = ExcursionModel.objects.get(id=id_exc)
+        item_product = CartItemModel.objects.create(
+            cart=cart,
+            item=excursion,
+            count = count,
+            custom_price = custom_price
+        )
+        item_product.save()
+        success = True
+    except Exception as _err:
+        print(_err)
+        success = False
+
+    data={
+        'success': success
+    }
+
+    return JsonResponse(data)
+
 
 
 def ExcCod(request):
@@ -173,9 +156,7 @@ def ExcCod(request):
         cart= cart
     )
     token.save()
-
     # sendler.send(phone, body)
-
     data = {
         'phone': phone,
         'body': body

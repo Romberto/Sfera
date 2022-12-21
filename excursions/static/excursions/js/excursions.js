@@ -8,16 +8,6 @@ window.addEventListener('load', function(){
         $('.phone').fadeIn(900)
     });
 
-    $('.limitInput').keyup(function(){
-        var count = $(this).val().length
-        console.log(count)
-        if(count === 4){
-            $(this).fadeOut()
-            $.ajax({
-
-            })
-        }
-    });
 
     /* валидция поля ввода суммы на кастомномном жетоне */
 
@@ -25,29 +15,34 @@ window.addEventListener('load', function(){
         var data = $(this).val()
         var excursion_id = $('#excursion_id').text()
         if($.isNumeric(data) && parseInt(data) >= 3000){
-            $('.query__excursion_link span').css('height', '0px')
-            $('.js_custom__price_link').attr('href', ''+excursion_id+'/'+data+'')
+            $(this).parent().next().fadeIn()
         }else{
-            $('.query__excursion_link span').css('height', '50px')
+            $(this).parent().next().fadeOut()
         }
     })
 
     $('.js_button_plus').on('click', function(e){
         var number = parseInt($(this).next().text())
+
         if(number<9){
             $(this).next().text(number+1)
+            $(this).parent().parent().find('.js_btn_add_to_cart').fadeIn()
+            $(this).parent().parent().find('.query__excursion_text').css('visibility', 'hidden')
         }else{
             e.preventDefault()
         }
-
-
     });
 
     $('.js_button_minus').on('click', function(e){
         var number =parseInt($(this).prev().text())
-        if(number>1){
+        if(number>=1){
             $(this).prev().text(number-1)
-        }else{
+            if(number-1 == 0){
+                $(this).parent().parent().find('.js_btn_add_to_cart').fadeOut()
+                $(this).parent().parent().find('.query__excursion_text').css('visibility', 'visible')
+            }
+        }
+        else{
             e.preventDefault()
         }
     });
@@ -65,5 +60,99 @@ window.addEventListener('load', function(){
             }
         })
     })
+
+    // вызывает виджет регистрации телефона при нажатие на кнопку корзина, елси номер не зарегистрирован
+    $('.js_cart_check_phone').on('click', function(e){
+        e.preventDefault()
+        $('.phone').css('visibility','visible')
+    })
+
+    $('.phone_btn').on('click',function(e){
+    e.preventDefault()
+    var phone = $('#phone').val()
+    let regex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    // дальше идет проверка на соответствие выражению
+    if(!regex.test(phone)){
+    alert('Не корректный номер телефона');
+    }else{
+
+        $.ajax({
+            url: '/excursions/check_phone/',            /* Куда пойдет запрос */
+            method: 'get',                  /* Метод передачи (post или get) */
+            dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+            data: {phone: phone},            /* Параметры передаваемые в запросе. */
+            success: function(response){
+                var phone = response['phone']
+                $('.phone__form').css('visibility', 'hidden')
+                $('.code').css('visibility', 'visible')
+                $('#user_phone').val(phone)
+                console.log(response['code'])
+            },
+            error:function (error){
+                console.log(error)
+            }
+
+            });
+        }
+    });
+
+    $('.limitInput').keyup(function(){
+    var count = $(this).val().length
+    if(count === 4){
+        var phone = $('#user_phone').val()
+        var code = $(this).val()
+        $.ajax({
+            url: '/excursions/check_code/',            /* Куда пойдет запрос */
+            method: 'get',                  /* Метод передачи (post или get) */
+            dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+            data: {phone: phone, code: code},            /* Параметры передаваемые в запросе. */
+            success: function(response){
+                if(response['status']){
+                    location.reload();
+                }else{
+                    $('.text__error').text('не верный код')
+
+                }
+            },
+            error:function (error){
+                console.log(error)
+            }
+        })
+        }
+        });
+
+    $('.js_btn_add_to_cart').on('click',function(e){
+        var count = $(this).parent().find('.js_count_human').text() // количество жетонов
+        var custom_price = '0'
+        if(!count){
+            count = '1';
+            var custom_price = $(this).parent().find('.js_custom_input').val()
+        }
+
+        var id_exc = $(this).attr('data-value')                        // id жетона
+        var btn = $(this)
+        $.ajax({
+            url: '/excursions/add_to_cart/',            /* Куда пойдет запрос */
+            method: 'get',                  /* Метод передачи (post или get) */
+            dataType: 'json',               /* Тип данных в ответе (xml, json, script, html). */
+            data: {id_exc: id_exc, count: count, custom_price:custom_price},            /* Параметры передаваемые в запросе. */
+            success: function(response){
+                if(response['success']){
+                    btn.fadeOut()
+                    btn.prev().css('visibility', 'visible')
+                    btn.parent().find('.js_count_human').text(0)
+
+                }
+
+
+            },
+            error:function (error){
+                console.log(error)
+            }
+        })
+    })
+
+
+
 
 });

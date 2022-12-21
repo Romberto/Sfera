@@ -9,6 +9,7 @@ urlpatterns = [
     path('check_phone/', views.checkPhone, name='check_phone'),
     path('check_code/', views.checkCode, name='check_code'),
     path('excursion_code/', views.ExcCod, name='exc_code'),
+    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
     path('widget/', views.widget_form, name='widget_form'),
     path('gallery/', views.GalleryView.as_view(), name='gallery'),
     path('gallery/<int:id>', views.PointGalleryView.as_view(), name='point')

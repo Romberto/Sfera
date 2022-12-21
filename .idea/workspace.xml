@@ -8,13 +8,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drivers/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excursions/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excursions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excursions/templates/excursions/excur_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/templates/excursions/excur_item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/static/excursions/css/excursions.css" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/css/excursions.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/static/excursions/css/gallery.css" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/css/gallery.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/static/excursions/js/coin_pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/js/coin_pay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/static/excursions/js/excursions.js" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/js/excursions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/templates/excursions/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/templates/excursions/excursions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tokens/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -45,10 +48,15 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/romberto/PycharmProjects/SferaStart&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/romberto/PycharmProjects/Sfera/cart/static/cart/fonts&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cart/static/cart/fonts" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="sendler" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Sfera" />

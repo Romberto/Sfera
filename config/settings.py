@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'tokens',
     'excursions',
     'main',
-
+    'cart'
 
 ]
 
@@ -76,7 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
+LOGOUT_REDIRECT_URL = "/"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

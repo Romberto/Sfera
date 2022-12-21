@@ -13,30 +13,47 @@
 <main>
     <div class="container">
         <div class="excursion">
-            <div class="menu__mobile">
-                    <div class="menu__mobile_burger">
-                        <div class="menu_mobile_inner">
-                            <div class="nemu_burger_lines"></div>
-                        </div>
-                    </div>
-                    <div class="mobile__menu-nav">
-
-                        <div class="mobile__menu_nav_list">
-                            <a class="mobile__menu_logo" href="/">
-                                <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
-                            </a>
-                            <a href="#" class="mobile__menu_btn">
-                                <div class="mobile__cross"></div>
-                            </a>
-                            <a class="mobile__menu_link" href="#">Контакты</a>
-                            <a class="mobile__menu_link" href="#">О нас</a>
-                            <a href="#" class="mobile__menu_link">Контакты</a>
-                            <a class="mobile__menu_link" href="{% url 'gallery'%}">Что посмотреть?</a>
-                        </div>
-
-                    </div>
-
+            <div class="phone">
+                <div class="inner_popup"></div>
+                <div class="phone__form">
+                    <label for="phone">укажите свой номер телефона</label>
+                    <input id="phone" type="text" class="phone__input" placeholder="79998887766">
+                    <div class="phone_btn" name="phone_form">подтвердить</div>
                 </div>
+                <div class="code">
+                    <div class="code__wrapper">
+                        <p class="code__description">В течение 30 секунд, Вам придёт СМС с 4-х значным кодом, введите его в
+                            поле под этим текстом.
+                            Тем самым Вы подтвердите свой номер телефона.</p>
+                        <input id="user_phone" type="hidden" maxlength="4" class="phone__input">
+                        <input id="code" type="text" maxlength="4" class="phone__input limitInput">
+                        <p class="text__error"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="menu__mobile">
+                <div class="menu__mobile_burger">
+                    <div class="menu_mobile_inner">
+                        <div class="nemu_burger_lines"></div>
+                    </div>
+                </div>
+
+                <div class="mobile__menu-nav">
+                    <div class="mobile__menu_nav_list">
+                        <a class="mobile__menu_logo" href="/">
+                            <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
+                        </a>
+                        <a href="#" class="mobile__menu_btn">
+                            <div class="mobile__cross"></div>
+                        </a>
+                        <a class="mobile__menu_link" href="#">Контакты</a>
+                        <a class="mobile__menu_link" href="#">О нас</a>
+                        <a href="#" class="mobile__menu_link">Контакты</a>
+                        <a class="mobile__menu_link" href="{% url 'gallery'%}">Что посмотреть?</a>
+                    </div>
+                </div>
+
+            </div>
             <nav class="menu">
                 <a href="#" class="menu__link">
                     <img class="logo__img" src="{% static 'main/img/logo.png'%}">
@@ -46,6 +63,17 @@
                     <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
                     <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
                     <li class="menu__item"><a href="{% url 'gallery'%}" class="menu__link">Что посмотреть?</a></li>
+                    <li class="menu__item">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'cart' request.user.id %}" class="cart_link js_cart_link">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% else %}
+                        <a href="#" class="cart_link js_cart_check_phone">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% endif %}
+                    </li>
                 </ul>
             </nav>
             <section class="point__content">
@@ -55,18 +83,21 @@
                     {% if excursion.custom %}
                     <li class="query__excursion_item">
                         <div class="query__excursion_link">
-                            <span id="excursion_id" type="hidden">{{excursion.id}}</span>
+
                             <img src="{% get_media_prefix %}{{excursion.photo}}" class="query__excursion_img">
                             <p class="query__excursion_text"><b>{{excursion.name}}</b></p>
 
                             <div class="custom__price_block">
                                 <p class="custom__text">укажите сумму</p>
                                 <p class="custom_text">минимум 3000</p>
+                                {% if request.user.is_authenticated %}
                                 <input class="custom__price_input js_custom_input">
+                                {% else %}
+                                <input class="custom__price_input js_cart_check_phone">
+                                {% endif %}
 
                             </div>
-                            <a class="query__excursion_price js_custom__price_link " href="{% url 'excursion_item' excursion.id  %}">Далее</a>
-                            <span></span>
+                            <div class="qyery__excursion_add_to_cart js_btn_add_to_cart" data-value="{{excursion.id}}">Добавить в корзину</div>
                         </div>
                     </li>
                     {% else %}
@@ -74,14 +105,22 @@
                         <div class="query__excursion_link ">
                             <img src="{% get_media_prefix %}{{excursion.photo}}" class="query__excursion_img">
                             <p class="query__excursion_text"><b>{{excursion.name}}</b></p>
-                            <p class="custom__text">кол-во человек</p>
+                            <div class="query__excursion_price">{{excursion.price}} руб.</div>
+                            <p class="custom__text">кол-во жетонов</p>
                             <div class="count_human_block">
+                                {% if request.user.is_authenticated %}
                                 <div class="count_human_plus js_button_plus"></div>
-                                <div class="count_human_window">1</div>
+                                <div class="count_human_window js_count_human">0</div>
                                 <div class="count_human_minus js_button_minus"></div>
+                                {% else %}
+                                <div class="count_human_plus js_cart_check_phone"></div>
+                                <div class="count_human_window js_count_human">0</div>
+                                <div class="count_human_minus js_cart_check_phone"></div>
+                                {% endif %}
                             </div>
-                            <p class="query__excursion_text">{{ excursion.description|slice:"200" }}{% if excursion.description|length > 200 %}...{% endif %}</p>
-                            <a class="query__excursion_price js_excursion_link" href='{% url "excursion_item" excursion.id  %}'>Монета {{excursion.price}} руб.</a>
+                            <a href="{% url 'excursion_item' excursion.id %}" class="query__excursion_text">{{ excursion.description|slice:"200" }}{% if excursion.description|length > 200 %}...{% endif %}</a>
+                            <div class="qyery__excursion_add_to_cart js_btn_add_to_cart" data-value="{{excursion.id}}">Добавить в корзину</div>
+
                         </div>
                     </li>
                     {% endif %}
