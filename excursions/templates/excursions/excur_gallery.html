@@ -11,30 +11,38 @@
 <main>
     <div class="container">
         <div class="gallery">
-                            <div class="menu__mobile">
-                    <div class="menu__mobile_burger">
-                        <div class="menu_mobile_inner">
-                            <div class="nemu_burger_lines"></div>
-                        </div>
+            <div class="menu__mobile">
+                <div class="menu__mobile_burger">
+                    <div class="menu_mobile_inner">
+                        <div class="nemu_burger_lines"></div>
                     </div>
-                    <div class="mobile__menu-nav">
+                </div>
+                <div class="mobile__menu-nav">
 
-                        <div class="mobile__menu_nav_list">
-                            <a class="mobile__menu_logo" href="/">
-                                <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
-                            </a>
-                            <a href="#" class="mobile__menu_btn">
-                                <div class="mobile__cross"></div>
-                            </a>
-                            <a href="{% url 'main'%}" class="mobile__menu_link">Главная</a>
-                            <a href="#" class="mobile__menu_link">Контакты</a>
-                            <a href="#" class="mobile__menu_link">О нас</a>
-                            <a href="{% url 'excursions'%}" class="mobile__menu_link">Маршруты</a>
-                        </div>
-
+                    <div class="mobile__menu_nav_list">
+                        <a class="mobile__menu_logo" href="/">
+                            <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
+                        </a>
+                        <a href="#" class="mobile__menu_btn">
+                            <div class="mobile__cross"></div>
+                        </a>
+                        <a href="{% url 'main'%}" class="mobile__menu_link">Главная</a>
+                        <a href="#" class="mobile__menu_link">Контакты</a>
+                        <a href="{% url 'excursions'%}" class="mobile__menu_link">Маршруты</a>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'cart' request.user.id %}" class="cart_link js_cart_link">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% else %}
+                        <a href="#scroll_phone" class="cart_link js_cart_check_phone">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% endif %}
                     </div>
 
                 </div>
+
+            </div>
             <nav class="menu">
                 <a href="#" class="menu__link">
                     <img class="logo__img" src="{% static 'main/img/logo.png'%}">
@@ -42,8 +50,18 @@
                 <ul class="menu__list">
                     <li class="menu__item"><a href="{% url 'main'%}" class="menu__link">Главная</a></li>
                     <li class="menu__item"><a href="#" class="menu__link">Контакты</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
                     <li class="menu__item"><a href="{% url 'excursions'%}" class="menu__link">Маршруты</a></li>
+                    <li class="menu__item">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'cart' request.user.id %}" class="cart_link js_cart_link">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% else %}
+                        <a href="#" class="cart_link js_cart_check_phone">
+                            <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
+                        </a>
+                        {% endif %}
+                    </li>
                 </ul>
             </nav>
             <section class="gallery__content">
@@ -69,5 +87,7 @@
 </main>
 {%endblock%}
 {% block scripts %}
+<script type="text/javascript" src="{% static 'excursions/js/excursions.js' %}"></script>
 <script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+
 {% endblock %}

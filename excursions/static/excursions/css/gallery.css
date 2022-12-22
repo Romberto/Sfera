@@ -78,6 +78,8 @@
     margin-right: 30px;
     margin-left: 10px;
     max-width: 280px;
+    max-height: 190px;
+    margin-bottom: 15px;
 }
 
 .point__description_text{

@@ -256,7 +256,9 @@
 
 .cart_img{
     width: 50px;
-    height: 37px;
+    height: 50px;
+    margin: 0 auto;
+    display: block;
 }
 
 

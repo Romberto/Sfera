@@ -14,7 +14,7 @@ window.addEventListener('load', function(){
     $('.js_custom_input').keyup(function(){
         var data = $(this).val()
         var excursion_id = $('#excursion_id').text()
-        if($.isNumeric(data) && parseInt(data) >= 3000){
+        if($.isNumeric(data) && parseInt(data) <= 1000 && parseInt(data) >= 11){
             $(this).parent().next().fadeIn()
         }else{
             $(this).parent().next().fadeOut()
@@ -47,24 +47,26 @@ window.addEventListener('load', function(){
         }
     });
 
-    $('.js_excursion_link').on('click', function(e){
-        var count_human = $(this).parent().find('.count_human_window').text()
-        $(this).attr('href', function(){
-           // e.preventDefault()
-           // console.log(this.href)
-            if(this.href.includes('/?count_human=')){
-                var fields = this.href.split('?count_human=')
-                return fields[0]+'?count_human='+count_human
-            }else{
-                return this.href+'?count_human='+count_human
-            }
-        })
-    })
+//    $('.js_excursion_link').on('click', function(e){
+//        var count_human = $(this).parent().find('.count_human_window').text()
+//        $(this).attr('href', function(){
+//            if(this.href.includes('/?count_human=')){
+//                var fields = this.href.split('?count_human=')
+//                return fields[0]+'?count_human='+count_human
+//            }else{
+//                return this.href+'?count_human='+count_human
+//            }
+//        })
+//    })
 
     // вызывает виджет регистрации телефона при нажатие на кнопку корзина, елси номер не зарегистрирован
     $('.js_cart_check_phone').on('click', function(e){
         e.preventDefault()
         $('.phone').css('visibility','visible')
+        $('.mobile__menu-nav').css('display', 'none')
+        $('html, body').animate({
+            scrollTop: $("#scroll_phone").offset().top
+        }, 1000);
     })
 
     $('.phone_btn').on('click',function(e){
@@ -123,14 +125,15 @@ window.addEventListener('load', function(){
 
     $('.js_btn_add_to_cart').on('click',function(e){
         var count = $(this).parent().find('.js_count_human').text() // количество жетонов
-        var custom_price = '0'
+        var custom_price = 0
         if(!count){
             count = '1';
-            var custom_price = $(this).parent().find('.js_custom_input').val()
+            custom_price = $(this).parent().find('.js_custom_input').val()
         }
 
         var id_exc = $(this).attr('data-value')                        // id жетона
         var btn = $(this)
+        $(this).parent().find('.js_custom_input').val("0")
         $.ajax({
             url: '/excursions/add_to_cart/',            /* Куда пойдет запрос */
             method: 'get',                  /* Метод передачи (post или get) */
@@ -141,16 +144,15 @@ window.addEventListener('load', function(){
                     btn.fadeOut()
                     btn.prev().css('visibility', 'visible')
                     btn.parent().find('.js_count_human').text(0)
-
                 }
-
-
             },
             error:function (error){
                 console.log(error)
             }
         })
     })
+
+
 
 
 

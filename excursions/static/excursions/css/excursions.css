@@ -202,7 +202,7 @@
     height: 50px;
     background: var(--white);
     border:2px solid var(--red);
-    margin: 0 auto;
+    margin: 0 auto 10px;
     display: flex;
     justify-content: space-around;
     border-radius: 5px;

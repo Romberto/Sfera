@@ -48,4 +48,21 @@
     .excursion__content{
         padding-top: 10px;
     }
+    .cart_img{
+        width: 80px;
+        height: 80px;
+    }
 }
+
+@media(max-width: 600px){
+    .point__descroption{
+        flex-direction: column;
+        align-items: center;
+    }
+    .point__description_text{
+        width: 80%;
+    }
+}
+
+
+

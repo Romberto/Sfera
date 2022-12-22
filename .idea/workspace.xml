@@ -6,18 +6,70 @@
   <component name="ChangeListManager">
     <list default="true" id="a9587627-2e45-4e77-b9ac-94dbb54c3b49" name="Changes" comment="обновил дизайн">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/migrations/0002_alter_cartitemmodel_cart_alter_cartitemmodel_count.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/migrations/0003_cartmodel_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/migrations/0004_cartitemmodel_custom_price.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/static/cart/css/cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/cart/static/cart/css/cart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/templates/cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/cart/templates/cart/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0002_drivermodel_salt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0003_alter_drivermodel_password_alter_drivermodel_salt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0004_alter_drivermodel_password.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0005_drivermodel_password_hash_alter_drivermodel_password.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0006_drivermodel_bot_user_id.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0007_alter_drivermodel_bot_user_id.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0008_drivermodel_admin_bool_driveradmingroupmodel_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0009_driveradmingroupmodel_name_group_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0010_alter_driveradmingroupmodel_admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/migrations/0011_alter_driveradmingroupmodel_admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0002_excursionphonecodmodel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0003_excursionphonecodmodel_excursions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0004_excursionpointmodel_excursionmodel_point.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0005_remove_excursionmodel_point_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0006_remove_excursionpointmodel_excursions_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0007_alter_excursionphonecodmodel_options_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0008_excursionpointmodel_description.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0009_alter_excursionmodel_price.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0010_excursionmodel_custom_alter_excursionmodel_price.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0011_alter_excursionphonecodmodel_phone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0012_alter_excursionphonecodmodel_phone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0013_excursionphonecodmodel_custom_price.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0014_excursionphonecodmodel_human_count.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/migrations/0015_alter_excursionphonecodmodel_human_count.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/static/excursions/css/excursions.css" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/css/excursions.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/static/excursions/css/gallery.css" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/css/gallery.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/static/excursions/js/coin_pay.js" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/js/coin_pay.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/static/excursions/js/excursions.js" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/static/excursions/js/excursions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/templates/excursions/excur_gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/templates/excursions/excur_gallery.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/templates/excursions/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/templates/excursions/excursions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/excursions/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/excursions/templates/excursions/point_gallery.html" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/templates/excursions/point_gallery.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excursions/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/excursions/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/static/main/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/css/main_media.css" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/css/main_media.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0002_tokenexmodel_excursion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0003_alter_tokenexmodel_driver_activate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0004_alter_tokenexmodel_driver_activate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0005_tokenexmodel_phone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0006_tokenexmodel_cart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0007_remove_tokenexmodel_cart_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/0008_tokenexmodel_cart.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,18 +95,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/romberto/PycharmProjects/Sfera/cart/static/cart/fonts&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/romberto/PycharmProjects/newscramm/cabinet/static/cabinet/js/cabinet.js",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cart/static/cart/fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cart/static/cart/js" />
     </key>
   </component>
   <component name="RunManager">

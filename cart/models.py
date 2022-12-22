@@ -25,7 +25,7 @@ class CartItemModel(models.Model):
     custom_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
     def total(self):
-        if self.item.custom:
+        if self.custom_price:
             return self.custom_price
         else:
             return self.count * self.item.price

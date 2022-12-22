@@ -6,9 +6,9 @@ from django.shortcuts import render
 from django.views import View
 
 from cart.models import CartModel, CartItemModel
-from excursions.models import ExcursionModel, ExcursionPhoneCodModel, ExcursionPointModel
+from excursions.models import ExcursionModel, ExcursionPointModel
 from sendler import SendlerMessage
-from tokens.models import TokenExModel
+
 from django.contrib.auth import authenticate, login
 
 class ExcursionsView(View):
@@ -123,13 +123,33 @@ def add_to_cart(request):
         user = request.user.id
         cart = CartModel.objects.get(user=user)
         excursion = ExcursionModel.objects.get(id=id_exc)
-        item_product = CartItemModel.objects.create(
-            cart=cart,
-            item=excursion,
-            count = count,
-            custom_price = custom_price
-        )
-        item_product.save()
+        # если строка с кастомной ценой уже существует заменяем новой
+        if int(custom_price) > 1:
+            if CartItemModel.objects.filter(item=id_exc).exists():
+                CartItemModel.objects.get(item=id_exc).delete()
+            item_product = CartItemModel.objects.create(
+                cart=cart,
+                item=excursion,
+                count=count,
+                custom_price=custom_price
+            )
+            item_product.save()
+
+        else:
+            if CartItemModel.objects.filter(item=id_exc).exists():
+                old_product = CartItemModel.objects.get(item=id_exc)
+                old_product.count = count
+                old_product.save()
+            else:
+                item_product = CartItemModel.objects.create(
+                    cart=cart,
+                    item=excursion,
+                    count=count,
+                    custom_price=custom_price
+                )
+                item_product.save()
+
+
         success = True
     except Exception as _err:
         print(_err)
