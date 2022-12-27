@@ -14,7 +14,7 @@ window.addEventListener('load', function(){
     $('.js_custom_input').keyup(function(){
         var data = $(this).val()
         var excursion_id = $('#excursion_id').text()
-        if($.isNumeric(data) && parseInt(data) <= 1000 && parseInt(data) >= 11){
+        if($.isNumeric(data) && parseInt(data)){
             $(this).parent().next().fadeIn()
         }else{
             $(this).parent().next().fadeOut()

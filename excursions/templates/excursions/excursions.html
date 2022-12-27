@@ -73,6 +73,9 @@
                     <li class="menu__item"><a href="{% url 'gallery'%}" class="menu__link">Что посмотреть?</a></li>
                     <li class="menu__item">
                         {% if request.user.is_authenticated %}
+                        {% if count %}
+                        <div class="menu_count_widget">{{count}}</div>
+                        {% endif %}
                         <a href="{% url 'cart' request.user.id %}" class="cart_link js_cart_link">
                             <img class="cart_img" src="{% static 'main/img/shoppingcart.svg' %}">
                         </a>
@@ -97,7 +100,6 @@
 
                             <div class="custom__price_block">
                                 <p class="custom__text">укажите сумму</p>
-                                <p class="custom_text">минимум 3000</p>
                                 {% if request.user.is_authenticated %}
                                 <input class="custom__price_input js_custom_input">
                                 {% else %}

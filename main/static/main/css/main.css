@@ -261,6 +261,23 @@
     display: block;
 }
 
+.menu__item{
+    position: relative;
+}
+.menu_count_widget{
+    position: absolute;
+    top: 32px;
+    left: 9px;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--white);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding-top: 2px;
+    font-weight: bold;
+}
+
 
 
 .excursion__content{

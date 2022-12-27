@@ -11,11 +11,17 @@ from sendler import SendlerMessage
 
 from django.contrib.auth import authenticate, login
 
+
 class ExcursionsView(View):
     def get(self, request):
         excursions = ExcursionModel.objects.all()
+        count = None
+        if request.user.is_authenticated:
+            cart = CartModel.objects.get(user=request.user.id)
+            count = cart.total_count
         return render(request, 'excursions/excursions.html', {
-            'excursions': excursions
+            'excursions': excursions,
+            'cart': count
         })
 
 
@@ -34,6 +40,7 @@ class ExcursionItemView(View):
 class ExcursionCustomItem(View):
     def get(self, request, id, price):
         excursion = ExcursionModel.objects.get(id=id)
+
 
         return render(request, 'excursions/excur_item.html', {
             'excursion': excursion,
@@ -99,7 +106,6 @@ def checkPhone(request):
     return JsonResponse(data)
 
 
-
 def checkCode(request):
     code_input = request.GET.get('code')
     phone = request.GET.get('phone')
@@ -115,6 +121,7 @@ def checkCode(request):
     }
     return JsonResponse(data)
 
+
 def add_to_cart(request):
     try:
         id_exc = request.GET.get('id_exc')
@@ -123,10 +130,16 @@ def add_to_cart(request):
         user = request.user.id
         cart = CartModel.objects.get(user=user)
         excursion = ExcursionModel.objects.get(id=id_exc)
-        # если строка с кастомной ценой уже существует заменяем новой
-        if int(custom_price) > 1:
-            if CartItemModel.objects.filter(item=id_exc).exists():
-                CartItemModel.objects.get(item=id_exc).delete()
+        cart_row = CartItemModel.objects.filter(item=id_exc, cart=cart)
+        if cart_row:
+            if int(custom_price) > 1:        # если строка с кастомной ценой уже существует заменяем новой
+                cart_row[0].custom_price = custom_price
+                cart_row[0].save()
+            else:
+                cart_row[0].count = count
+                cart_row[0].save()
+
+        else:
             item_product = CartItemModel.objects.create(
                 cart=cart,
                 item=excursion,
@@ -134,64 +147,15 @@ def add_to_cart(request):
                 custom_price=custom_price
             )
             item_product.save()
-
-        else:
-            if CartItemModel.objects.filter(item=id_exc).exists():
-                old_product = CartItemModel.objects.get(item=id_exc)
-                old_product.count = count
-                old_product.save()
-            else:
-                item_product = CartItemModel.objects.create(
-                    cart=cart,
-                    item=excursion,
-                    count=count,
-                    custom_price=custom_price
-                )
-                item_product.save()
-
-
+            #todo после подключения виджета убрать cart.save()
+        cart.save()
         success = True
     except Exception as _err:
         print(_err)
         success = False
 
-    data={
+    data = {
         'success': success
     }
 
-    return JsonResponse(data)
-
-
-
-def ExcCod(request):
-    phone = request.GET.get('phone')
-    phone = clear_phone(phone)
-    cart = ExcursionPhoneCodModel.objects.get(phone=phone)
-    body = randint(11111, 99999)
-    sendler = SendlerMessage()
-    phone = sendler.check_phone(phone)
-    token = TokenExModel(
-        body=body,
-        phone=phone,
-        cart= cart
-    )
-    token.save()
-    # sendler.send(phone, body)
-    data = {
-        'phone': phone,
-        'body': body
-    }
-    return JsonResponse(data)
-
-
-def widget_form(request):
-    phone = request.GET.get('phone')
-    c_phone = clear_phone(phone)
-    cart = ExcursionPhoneCodModel.objects.get(phone=c_phone)
-    number_order = cart.id + 100
-    data = {
-        'phone': c_phone,
-        'order': cart.id,
-        'number_order': number_order
-    }
     return JsonResponse(data)

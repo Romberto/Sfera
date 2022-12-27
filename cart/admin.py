@@ -8,7 +8,7 @@ class ItemInline(admin.StackedInline):
 
 class CartAdmin(admin.ModelAdmin):
     inlines = [ItemInline]
-    list_display = ["created", "total_price", "paid"]
+    list_display = ["user", "total_price", "paid"]
 
 
 admin.site.register(CartModel, CartAdmin)

@@ -4,6 +4,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
 <link rel="stylesheet" href="{% static 'cart/css/cart.css'%}">
+<link rel="stylesheet" href="{% static 'main/css/main_media.css'%}">
 {% endblock %}
 {% block title%}{{excursion.name}}{% endblock %}
 {% block content %}
@@ -23,6 +24,27 @@
                         <div class="nemu_burger_lines"></div>
                     </div>
                 </div>
+                 <div class="menu__mobile_burger">
+                        <div class="menu_mobile_inner">
+                            <div class="nemu_burger_lines"></div>
+                        </div>
+                    </div>
+                    <div class="mobile__menu-nav">
+
+                        <div class="mobile__menu_nav_list">
+                            <a class="mobile__menu_logo" href="/">
+                                <img class="mobile__menu_logo-img" src="{% static 'main/img/logo.png' %}">
+                            </a>
+                            <a href="#" class="mobile__menu_btn">
+                                <div class="mobile__cross"></div>
+                            </a>
+                            <a class="mobile__menu_link" href="#">Контакты</a>
+                            <a class="mobile__menu_link" href="#">О нас</a>
+                            <a class="mobile__menu_link" href="{% url 'excursions'%}">Маршруты</a>
+                            <a class="mobile__menu_link" href="{% url 'gallery'%}">Что посмотреть?</a>
+                        </div>
+
+                    </div>
 
                 <div class="mobile__menu-nav">
                     <div class="mobile__menu_nav_list">

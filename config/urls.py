@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('drivers/', include('drivers.urls')),
     path('excursions/', include('excursions.urls')),
-    path('cart/', include('cart.urls'))
+    path('cart/', include('cart.urls')),
+    path('product_cod/', include('product_cod.urls')),
+    path('api-auth/',include('rest_framework.urls')),
+    path('api/v1/', include('api.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

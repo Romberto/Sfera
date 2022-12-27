@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'drivers',
     'excursions',
     'main',
-    'cart'
+    'cart',
+    'product_cod',
+    'rest_framework',
+    'api'
 
 ]
 
